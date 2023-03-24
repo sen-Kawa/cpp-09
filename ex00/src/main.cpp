@@ -2,21 +2,24 @@
 #include <cstdlib>
 #include <fstream>
 
+void errorOpening()
+{
+	std::cout << "Error opening csv" << std::endl;
+	exit(1);
+}
+
 void readDB()
 {
 	std::ifstream	fin("src/data.csv");
 	std::string		line;
+	std::string		delimiter(",");
+	size_t			pos = 0;
 
 	if (fin.fail())
-	{
-		std::cout << "Error opening csv" << std::endl;
-		exit(1);
-	}
-	std::cout << "File open" << std::endl;
+		errorOpening();
 	while (!fin.eof())
 	{
 		getline(fin, line);
-		std::cout << line << std::endl;
 	}
 	fin.close();
 	return ;
@@ -36,4 +39,3 @@ int main(int argc, char **argv)
 	readDB();
 	return (0);
 }
-
