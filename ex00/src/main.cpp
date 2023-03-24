@@ -4,14 +4,20 @@
 
 void readDB()
 {
-	std::ifstream	fin("data.csv");
+	std::ifstream	fin("src/data.csv");
+	std::string		line;
 
 	if (fin.fail())
 	{
-		std::cout << "Error opening" << std::endl;
+		std::cout << "Error opening csv" << std::endl;
 		exit(1);
 	}
 	std::cout << "File open" << std::endl;
+	while (!fin.eof())
+	{
+		getline(fin, line);
+		std::cout << line << std::endl;
+	}
 	fin.close();
 	return ;
 }
