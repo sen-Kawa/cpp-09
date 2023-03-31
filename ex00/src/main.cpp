@@ -1,6 +1,21 @@
 #include <iostream>
+#include <map>
 #include <cstdlib>
 #include <fstream>
+#include <sstream>
+
+std::map<std::string, float>ratesMap;
+
+void fillMap(std::string line)
+{
+	std::stringstream	s(line);
+	std::string			word;
+
+	while (getline(s, word, ','))
+	{
+		ratesMap[word] = 0;
+	}
+}
 
 void errorOpening()
 {
@@ -12,8 +27,6 @@ void readDB()
 {
 	std::ifstream	fin("src/data.csv");
 	std::string		line;
-	std::string		delimiter(",");
-	size_t			pos = 0;
 
 	if (fin.fail())
 		errorOpening();
@@ -29,7 +42,10 @@ int	parsing(int argc, char **argv)
 {
 	(void)argv;
 	if (argc != 2)
-		return (-1);
+	{
+		std::cout << "Error, could not open file." << std::endl;
+		exit(1);
+	}
 	return (1);
 }
 
