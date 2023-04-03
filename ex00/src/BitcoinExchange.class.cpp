@@ -1,5 +1,11 @@
 #include "../header/BitcoinExchange.class.hpp"
 
+void BitcoinExchange::error(std::string type)
+{
+	std::cout << "Error: " << type << std::endl;
+	exit(1);
+}
+
 void BitcoinExchange::printMap()
 {
 	std::map<std::string, float>::iterator it = ratesMap.begin();
@@ -29,17 +35,14 @@ void	BitcoinExchange::readDB()
 	std::string		line;
 
 	if (fin.fail())
-	{
-		std::cout << "Error opening csv" << std::endl;
-		exit(1);
-	}
+		error("Opening csv file.");
 	getline(fin, line);
 	while (!fin.eof())
 	{
 		getline(fin, line);
 		fillMap(line);
 	}
-	printMap();
+//	printMap();
 	fin.close();
 	return ;
 }
@@ -50,13 +53,10 @@ void	BitcoinExchange::parsingFile()
 	std::string		line;
 
 	if (fin.fail())
-	{
-		std::cout << "Error opening file" << std::endl;
-		exit(1);
-	}
+		error("Opening input file.");
 	getline(fin, line);
-	std::cout << "First line is: " << line << std::endl;
-	//parse firt line
+	if (line.compare("date | value") != 0)
+		error("Invalid input format.");
 	while (!fin.eof())
 	{
 		//parsing each line

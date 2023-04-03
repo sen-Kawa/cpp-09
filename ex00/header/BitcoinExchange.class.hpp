@@ -22,6 +22,8 @@ class BitcoinExchange
 
 		void	parsingFile();
 
+		void	error(std::string type);
+
 	public:
 
 		int	getBitcoinExchange(void) const;
