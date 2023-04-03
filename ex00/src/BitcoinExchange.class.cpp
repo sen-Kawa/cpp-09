@@ -46,7 +46,7 @@ void	BitcoinExchange::readDB()
 
 void	BitcoinExchange::parsingFile()
 {
-	std::ifstream	fin(inputFile);
+	std::ifstream	fin(inputFile.c_str());
 	std::string		line;
 
 	if (fin.fail())
@@ -55,6 +55,7 @@ void	BitcoinExchange::parsingFile()
 		exit(1);
 	}
 	getline(fin, line);
+	std::cout << "First line is: " << line << std::endl;
 	//parse firt line
 	while (!fin.eof())
 	{
