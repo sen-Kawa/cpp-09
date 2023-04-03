@@ -1,17 +1,18 @@
 #include <iostream>
+#include <iomanip>
 #include <map>
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
 
-std::map<std::string, std::string>ratesMap;
+std::map<std::string, float>ratesMap;
 
 void printMap()
 {
-	std::map<std::string, std::string>::iterator it = ratesMap.begin();
+	std::map<std::string, float>::iterator it = ratesMap.begin();
 	while (it != ratesMap.end())
 	{
-		std::cout << "Date: " << it->first << ", Value: " << it->second << std::endl;
+		std::cout << "Date: " << it->first << ", Value: " << std::fixed << std::setprecision(2) << it->second << std::endl;
 		++it;
 	}
 }
@@ -23,7 +24,7 @@ void fillMap(std::string line)
 
 	getline(s, date, ',');
 	getline(s, rate);
-	ratesMap[date] = rate;
+	ratesMap[date] = atof(rate.c_str());
 //	std::cout << "Element in map is:  " << ratesMap[date] << std::endl;
 //	std::cout << "Date: " << date << std::endl;
 //	std::cout << "Rate: " << rate << std::endl;
