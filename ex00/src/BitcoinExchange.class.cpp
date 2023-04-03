@@ -31,6 +31,9 @@ void	BitcoinExchange::fillMap(std::string line)
 
 void	BitcoinExchange::compareDates(std::string line)
 {
+	// parse date part of input file??
+	// find dates in exchange map
+	
 	std::stringstream   s(line);
 	std::string         rate, date;
 	
