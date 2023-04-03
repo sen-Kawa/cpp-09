@@ -12,13 +12,19 @@
 class BitcoinExchange
 {
 	private:
+		
+		const std::string	inputFile;
+		std::map<std::string, float>ratesMap;
 
+		void	readDB();
+		void	fillMap(std::string	line);
 
 	public:
 
 		int	getBitcoinExchange(void) const;
 
 		BitcoinExchange(void);
+		BitcoinExchange(std::string inputFile);
 		BitcoinExchange(BitcoinExchange const &src);
 		BitcoinExchange&	operator=(BitcoinExchange const &assign);
 		~BitcoinExchange(void);

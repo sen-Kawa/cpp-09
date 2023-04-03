@@ -1,7 +1,5 @@
 #include "../header/BitcoinExchange.class.hpp"
 
-std::map<std::string, float>ratesMap;
-
 void printMap()
 {
 	std::map<std::string, float>::iterator it = ratesMap.begin();
@@ -12,46 +10,8 @@ void printMap()
 	}
 }
 
-void fillMap(std::string line)
+int	parsing(int argc, std::string input)
 {
-	std::stringstream	s(line);
-	std::string			rate, date;
-
-	getline(s, date, ',');
-	getline(s, rate);
-	ratesMap[date] = atof(rate.c_str());
-//	std::cout << "Element in map is:  " << ratesMap[date] << std::endl;
-//	std::cout << "Date: " << date << std::endl;
-//	std::cout << "Rate: " << rate << std::endl;
-}
-
-void errorOpening()
-{
-	std::cout << "Error opening csv" << std::endl;
-	exit(1);
-}
-
-void readDB()
-{
-	std::ifstream	fin("src/data.csv");
-	std::string		line;
-
-	if (fin.fail())
-		errorOpening();
-	getline(fin, line);
-	while (!fin.eof())
-	{
-		getline(fin, line);
-		fillMap(line);
-	}
-	fin.close();
-	printMap();
-	return ;
-}
-
-int	parsing(int argc, char **argv)
-{
-	(void)argv;
 	if (argc != 2)
 	{
 		std::cout << "Error, could not open file." << std::endl;
@@ -62,7 +22,7 @@ int	parsing(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
-	parsing(argc, argv);
-	readDB();
+	parsing(argc, argv[1]);
+
 	return (0);
 }
