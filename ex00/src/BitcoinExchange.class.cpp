@@ -39,6 +39,7 @@ void	BitcoinExchange::readDB()
 		getline(fin, line);
 		fillMap(line);
 	}
+	printMap();
 	fin.close();
 	return ;
 }
@@ -50,6 +51,7 @@ BitcoinExchange::BitcoinExchange(void)
 
 BitcoinExchange::BitcoinExchange(std::string inputFile) : inputFile(inputFile)
 {
+	readDB();
 	return ;
 }
 
@@ -61,6 +63,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &src)
 
 BitcoinExchange &	BitcoinExchange::operator=(const BitcoinExchange &assign)
 {
+	(void) assign;
 	return (*this);
 }
 
