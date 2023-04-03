@@ -2,6 +2,11 @@
 # define BITCOINEXCHANGE_CLASS_HPP
 
 #include <iostream>
+#include <iomanip>
+#include <map>
+#include <cstdlib>
+#include <fstream>
+#include <sstream>
 #include "colours.hpp"
 
 class BitcoinExchange

@@ -1,9 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <map>
-#include <cstdlib>
-#include <fstream>
-#include <sstream>
+#include "../header/BitcoinExchange.class.hpp"
 
 std::map<std::string, float>ratesMap;
 
