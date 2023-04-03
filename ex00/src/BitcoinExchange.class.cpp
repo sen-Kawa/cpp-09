@@ -44,6 +44,27 @@ void	BitcoinExchange::readDB()
 	return ;
 }
 
+void	BitcoinExchange::parsingFile()
+{
+	std::ifstream	fin(inputFile);
+	std::string		line;
+
+	if (fin.fail())
+	{
+		std::cout << "Error opening file" << std::endl;
+		exit(1);
+	}
+	getline(fin, line);
+	//parse firt line
+	while (!fin.eof())
+	{
+		//parsing each line
+		getline(fin, line);
+	}
+	fin.close();
+	return ;
+}
+
 BitcoinExchange::BitcoinExchange(void)
 {
 	return ;
@@ -52,6 +73,7 @@ BitcoinExchange::BitcoinExchange(void)
 BitcoinExchange::BitcoinExchange(std::string inputFile) : inputFile(inputFile)
 {
 	readDB();
+	parsingFile();
 	return ;
 }
 

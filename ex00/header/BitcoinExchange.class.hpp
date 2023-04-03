@@ -20,6 +20,8 @@ class BitcoinExchange
 		void	printMap();
 		void	fillMap(std::string	line);
 
+		void	parsingFile();
+
 	public:
 
 		int	getBitcoinExchange(void) const;
