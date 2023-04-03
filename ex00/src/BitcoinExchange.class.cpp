@@ -29,6 +29,15 @@ void	BitcoinExchange::fillMap(std::string line)
 //std::cout << "Rate: " << rate << std::endl;
 }
 
+void	BitcoinExchange::compareDates(std::string line)
+{
+	std::stringstream   s(line);
+	std::string         rate, date;
+	
+	getline(s, date, ',');
+	getline(s, rate);
+}
+
 void	BitcoinExchange::readDB()
 {
 	std::ifstream	fin("src/data.csv");
@@ -59,8 +68,9 @@ void	BitcoinExchange::parsingFile()
 		error("Invalid input format.");
 	while (!fin.eof())
 	{
-		//parsing each line
 		getline(fin, line);
+		compareDates(line);
+		//parsing each line
 	}
 	fin.close();
 	return ;
