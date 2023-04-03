@@ -17,6 +17,7 @@ class BitcoinExchange
 		std::map<std::string, float>ratesMap;
 
 		void	readDB();
+		void	printMap();
 		void	fillMap(std::string	line);
 
 	public:

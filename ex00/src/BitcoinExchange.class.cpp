@@ -1,5 +1,15 @@
 #include "../header/BitcoinExchange.class.hpp"
 
+void BitcoinExchange::printMap()
+{
+	std::map<std::string, float>::iterator it = ratesMap.begin();
+	while (it != ratesMap.end())
+	{
+		std::cout << "Date: " << it->first << ", Value: " << std::fixed << std::setprecision(2) << it->second << std::endl;
+		++it;
+	}
+}
+
 void	BitcoinExchange::fillMap(std::string line)
 {
 	std::stringstream   s(line);
