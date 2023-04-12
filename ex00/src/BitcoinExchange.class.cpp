@@ -32,13 +32,19 @@ void	BitcoinExchange::fillMap(std::string line)
 void	BitcoinExchange::compareDates(std::string line)
 {
 	// parse date part of input file??
-	// find dates in exchange map
-	
+	// find dates in exchange map	
 	std::stringstream   s(line);
 	std::string         date, amount;
 	
-	getline(s, date, '|');
+	std::cout << line << std::endl;
+//	std::getline(s, date, delim);
 	getline(s, amount);
+
+	std::cout << date << std::endl;
+	if (ratesMap.find(date) != ratesMap.end())
+		std::cout << "value found" << date << std::endl;
+	else
+		std::cout << "value NOT found" << date << std::endl;
 }
 
 void	BitcoinExchange::readDB()
@@ -69,10 +75,8 @@ void	BitcoinExchange::parsingFile()
 	getline(fin, line);
 	if (line.compare("date | value") != 0)
 		error("Invalid input format.");
-	std::cout << "success opening" << std::endl;
-	while (!fin.eof())
+	while (getline(fin, line))
 	{
-		getline(fin, line);
 		compareDates(line);
 		//parsing each line
 	}
