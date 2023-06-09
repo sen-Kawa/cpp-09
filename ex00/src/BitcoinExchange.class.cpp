@@ -26,10 +26,7 @@ void	BitcoinExchange::fillMap(std::string line)
 	
 	getline(s, date, ',');
 	getline(s, rate);
-	ratesMap[date] = atof(rate.c_str());                           
-	//std::cout << "Element in map is:  " << ratesMap[date] << std::endl;  
-	//std::cout << "Date: " << date << std::endl;
-	//std::cout << "Rate: " << rate << std::endl;
+	ratesMap[date] = atof(rate.c_str());
 }
 
 int	BitcoinExchange::checkDelim(std::string line)
@@ -193,7 +190,6 @@ void	BitcoinExchange::readDB()
 		getline(fin, line);
 		fillMap(line);
 	}
-//	printMap();
 	fin.close();
 	return ;
 }
@@ -209,10 +205,7 @@ void	BitcoinExchange::parsingFile()
 	if (line.compare("date | value") != 0)
 		error("Invalid input format.");
 	while (getline(fin, line))
-	{
 		compareDates(line);
-		//parsing each line
-	}
 	fin.close();
 	return ;
 }
