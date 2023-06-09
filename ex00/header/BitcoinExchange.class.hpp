@@ -21,6 +21,7 @@ class BitcoinExchange
 		void	fillMap(std::string	line);
 
 		void	parsingFile();
+		int		checkDelim(std::string line);
 		void	compareDates(std::string line);
 
 		void	error(std::string type);

@@ -29,19 +29,29 @@ void	BitcoinExchange::fillMap(std::string line)
 	//std::cout << "Rate: " << rate << std::endl;
 }
 
+int	BitcoinExchange::checkDelim(std::string line)
+{
+	if (line.find(" | ") != 10)
+	{
+		std::cout << "Error: Wrong delimiter format " << std::endl;
+		return (1);
+	}
+	return (0);
+}
+
 void	BitcoinExchange::compareDates(std::string line)
 {
-	// parse date part of input file??
-	// find dates in exchange map	
 	std::stringstream   s(line);
 	std::string         date, delim, amount;
-	date.resize(10);
-	delim.resize(3);
+
 	s >> date >> delim >> amount;
-	std::cout << "Line is: " << line << std::endl;
-	std::cout << "Date is: " << date << std::endl;
-	std::cout << "Amount is: " << amount << std::endl;
-	std::cout << "Delim is: " << delim << std::endl;
+	
+	if (checkDelim(line) == 1)
+		return ;
+	std::cout << "Line is:" << line;
+	std::cout << "Delim is:" << delim;
+	std::cout << "Date is:" << date;
+	std::cout << "Amount is:" << amount;
 
 	if (ratesMap.find(date) != ratesMap.end())
 		std::cout << "value found" << date << std::endl;
