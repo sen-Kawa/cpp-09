@@ -1,4 +1,5 @@
 #include "../header/BitcoinExchange.class.hpp"
+#include <cstdlib>
 
 void BitcoinExchange::error(std::string type)
 {
@@ -33,25 +34,63 @@ int	BitcoinExchange::checkDelim(std::string line)
 {
 	if (line.find(" | ") != 10)
 	{
-		std::cout << "Error: Wrong delimiter format " << std::endl;
-		return (1);
+		std::cout << "Error: Wrong delimiter format." << std::endl;
+		return (-1);
 	}
 	return (0);
+}
+
+int	BitcoinExchange::checkDate(std::string date)
+{
+	std::stringstream   s(date);
+	std::string         year, month, day;
+	s >> year >> month >> day;
+	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+	{
+		std::cout << "Error: Bad input => " << date << std::endl;
+		return (-1);
+	}
+
+//	std::cout << "Year is:" << year;
+//	std::cout << "Month is:" << month;
+//	std::cout << "Day is:" << day;
+	
+	return (0);
+}
+
+float	BitcoinExchange::checkValue(std::string value)
+{
+	float	val = atof(value.c_str());
+	if (value.find("-") == 0)
+	{
+		std::cout << "Error: Not a positive number." << std::endl;
+		return (-1);
+	}
+	if (value.size() > 4 || val > 1000)
+	{
+		std::cout << "Error: Too large a number." << std::endl;
+		return (-1);
+	}
+	return (val);
 }
 
 void	BitcoinExchange::compareDates(std::string line)
 {
 	std::stringstream   s(line);
-	std::string         date, delim, amount;
+	std::string         date, delim, value;
 
-	s >> date >> delim >> amount;
+	s >> date >> delim >> value;
 	
-	if (checkDelim(line) == 1)
+	checkDate(date);
+	if (checkDelim(line) == -1)
+		return ;
+	float	val = checkValue(value);
+	if (val == -1)
 		return ;
 	std::cout << "Line is:" << line;
 	std::cout << "Delim is:" << delim;
 	std::cout << "Date is:" << date;
-	std::cout << "Amount is:" << amount;
+	std::cout << "Value is:" << value;
 
 	if (ratesMap.find(date) != ratesMap.end())
 		std::cout << "value found" << date << std::endl;

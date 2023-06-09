@@ -22,6 +22,8 @@ class BitcoinExchange
 
 		void	parsingFile();
 		int		checkDelim(std::string line);
+		int		checkDate(std::string date);
+		float	checkValue(std::string value);
 		void	compareDates(std::string line);
 
 		void	error(std::string type);
