@@ -40,20 +40,63 @@ int	BitcoinExchange::checkDelim(std::string line)
 	return (0);
 }
 
+int	BitcoinExchange::checkYear(std::string year)
+{
+	int	y = atoi(year.c_str());
+
+	if (y > 2022 || y < 2009)
+	{
+		std::cout << "Error: Year out of range => " << year << std::endl;
+		return (-1);
+	}
+//	std::cout << "Year is:" << year;
+//	std::cout << "Year int is:" << y;
+	return (0);
+}
+
+int	BitcoinExchange::checkMonth(std::string month)
+{
+	int	m = atoi(month.c_str());
+
+	if (m > 12 || m < 1)
+	{
+		std::cout << "Error: Month out of range => " << month << std::endl;
+		return (-1);
+	}
+	return (0);
+}
+
+int	BitcoinExchange::checkDay(std::string day)
+{
+	int	d = atoi(day.c_str());
+
+	if (d > 31 || d < 1)
+	{
+		std::cout << "Error: Day out of range => " << day << std::endl;
+		return (-1);
+	}
+	return (0);
+}
+
 int	BitcoinExchange::checkDate(std::string date)
 {
 	std::stringstream   s(date);
 	std::string         year, month, day;
-	s >> year >> month >> day;
+
 	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
 	{
 		std::cout << "Error: Bad input => " << date << std::endl;
 		return (-1);
 	}
-
-//	std::cout << "Year is:" << year;
-//	std::cout << "Month is:" << month;
-//	std::cout << "Day is:" << day;
+	getline(s, year, '-');
+	getline(s, month, '-');
+	getline(s, day);
+	if (checkYear(year) == -1)
+		return (-1);
+	if (checkMonth(month) == -1)
+		return (-1);
+	if (checkDay(day) == -1)
+		return (-1);
 	
 	return (0);
 }
@@ -81,19 +124,20 @@ void	BitcoinExchange::compareDates(std::string line)
 
 	s >> date >> delim >> value;
 	
-	checkDate(date);
+	if (checkDate(date) == -1)
+		return ;
 	if (checkDelim(line) == -1)
 		return ;
 	float	val = checkValue(value);
 	if (val == -1)
 		return ;
-	std::cout << "Line is:" << line;
-	std::cout << "Delim is:" << delim;
-	std::cout << "Date is:" << date;
-	std::cout << "Value is:" << value;
 
 	if (ratesMap.find(date) != ratesMap.end())
-		std::cout << "value found" << date << std::endl;
+	{
+		float result = val * ratesMap[date];
+		std::cout << date << "=> " << value << " = " << std::fixed << std::setprecision(2) << result << std::endl;
+
+	}
 	else
 		std::cout << "value NOT found" << date << std::endl;
 }
