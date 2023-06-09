@@ -149,7 +149,7 @@ void BitcoinExchange::findDate(std::string date, float val)
 	if (ratesMap.find(date) != ratesMap.end())
 	{
 		float result = val * ratesMap[date];
-		std::cout << date << "=> " << std::fixed << std::setprecision(2) << val << " = " << result << std::endl;
+		std::cout << date << " => " << std::fixed << std::setprecision(2) << val << " = " << result << std::endl;
 		return ;
 	}
 	else
