@@ -34,13 +34,15 @@ void	BitcoinExchange::compareDates(std::string line)
 	// parse date part of input file??
 	// find dates in exchange map	
 	std::stringstream   s(line);
-	std::string         date, amount;
-	
-	std::cout << line << std::endl;
-//	std::getline(s, date, delim);
-	getline(s, amount);
+	std::string         date, delim, amount;
+	date.resize(10);
+	delim.resize(3);
+	s >> date >> delim >> amount;
+	std::cout << "Line is: " << line << std::endl;
+	std::cout << "Date is: " << date << std::endl;
+	std::cout << "Amount is: " << amount << std::endl;
+	std::cout << "Delim is: " << delim << std::endl;
 
-	std::cout << date << std::endl;
 	if (ratesMap.find(date) != ratesMap.end())
 		std::cout << "value found" << date << std::endl;
 	else
