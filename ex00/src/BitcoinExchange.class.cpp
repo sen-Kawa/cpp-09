@@ -1,5 +1,7 @@
 #include "../header/BitcoinExchange.class.hpp"
 #include <cstdlib>
+#include <iomanip>
+#include <unistd.h>
 
 void BitcoinExchange::error(std::string type)
 {
@@ -49,8 +51,6 @@ int	BitcoinExchange::checkYear(std::string year)
 		std::cout << "Error: Year out of range => " << year << std::endl;
 		return (-1);
 	}
-//	std::cout << "Year is:" << year;
-//	std::cout << "Year int is:" << y;
 	return (0);
 }
 
@@ -76,6 +76,36 @@ int	BitcoinExchange::checkDay(std::string day)
 		return (-1);
 	}
 	return (0);
+}
+
+std::string BitcoinExchange::decreaseDate(std::string date)
+{
+	std::stringstream   s(date);
+	std::string         year, month, day, concatenated;
+
+	getline(s, year, '-');
+	getline(s, month, '-');
+	getline(s, day);
+	int	y = atoi(year.c_str());
+	int	m = atoi(month.c_str());
+	int	d = atoi(day.c_str());
+	if (d > 1)
+		d--;
+	else if (m > 1)
+	{
+		d = 31;
+		m--;
+	}
+	else if (y > 2008)
+	{
+		d = 31;
+		m = 12;
+		y--;
+	}
+	std::stringstream conc;
+	conc << y << '-' << std::setw(2) << std::setfill('0') << m << '-' << std::setw(2) << std::setfill('0') << d;
+	concatenated = conc.str();
+	return (concatenated);
 }
 
 int	BitcoinExchange::checkDate(std::string date)
@@ -117,6 +147,21 @@ float	BitcoinExchange::checkValue(std::string value)
 	return (val);
 }
 
+void BitcoinExchange::findDate(std::string date, float val)
+{
+	if (ratesMap.find(date) != ratesMap.end())
+	{
+		float result = val * ratesMap[date];
+		std::cout << date << "=> " << std::fixed << std::setprecision(2) << val << " = " << result << std::endl;
+		return ;
+	}
+	else
+	{
+		date = decreaseDate(date);
+		findDate(date, val);
+	}
+}
+
 void	BitcoinExchange::compareDates(std::string line)
 {
 	std::stringstream   s(line);
@@ -132,14 +177,7 @@ void	BitcoinExchange::compareDates(std::string line)
 	if (val == -1)
 		return ;
 
-	if (ratesMap.find(date) != ratesMap.end())
-	{
-		float result = val * ratesMap[date];
-		std::cout << date << "=> " << value << " = " << std::fixed << std::setprecision(2) << result << std::endl;
-
-	}
-	else
-		std::cout << "value NOT found" << date << std::endl;
+	findDate(date, val);
 }
 
 void	BitcoinExchange::readDB()
