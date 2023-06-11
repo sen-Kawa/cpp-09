@@ -1,8 +1,8 @@
 #include "../header/PmergeMe.class.hpp"
 
-int PmergeMe::getPmergeMe(void) const
+std::string PmergeMe::getUnsorted(void) const
 {
-	return (this->number);
+	return (this->unsorted);
 }
 
 PmergeMe::PmergeMe(void)
@@ -18,7 +18,7 @@ PmergeMe::PmergeMe(PmergeMe const &src)
 
 PmergeMe &	PmergeMe::operator=(const PmergeMe &assign)
 {
-	this->number = assign.getPmergeMe();
+	this->unsorted = assign.getUnsorted();
 	return (*this);
 }
 

@@ -1,17 +1,20 @@
-#ifndef PmergeMe_CLASS_HPP
-# define PmergeMe_CLASS_HPP
+#ifndef PMERGEME_CLASS_HPP
+# define PMERGEME_CLASS_HPP
 
 #include <iostream>
+#include <cstdlib>
 #include "colours.hpp"
 
 class PmergeMe
 {
 	private:
 
+		std::string	unsorted;
+
 
 	public:
 
-		int	getPmergeMe(void) const;
+		std::string	getUnsorted(void) const;
 
 		PmergeMe(void);
 		PmergeMe(PmergeMe const &src);
