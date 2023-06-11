@@ -12,7 +12,7 @@ class RPN
 
 		int	getRPN(void) const;
 
-		RPN(void);
+		RPN(char *input);
 		RPN(RPN const &src);
 		RPN&	operator=(RPN const &assign);
 		~RPN(void);
