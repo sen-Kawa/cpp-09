@@ -42,7 +42,7 @@ void RPN::checkOperator(char action)
 
 void RPN::singleOperation()
 {
-	int	operand1, operand2;
+	int	operand1, operand2, result;
 	char action;
 
 	operand1 = numbers.top();
@@ -51,31 +51,33 @@ void RPN::singleOperation()
 	numbers.pop();
 	action = stack.top();
 	stack.pop();
-			std::cout << operand1 << std::endl;
-			std::cout << operand2 << std::endl;
 	switch (action)
 	{
 		case 42:
-			std::cout << "multi" << std::endl;
+			result = operand1 * operand2;
 			break;
 		case 43:
-			std::cout << "SUM" << std::endl;
+			result = operand1 + operand2;
 			break;
 		case 45:
-			std::cout << "resta" << std::endl;
+			result = operand1 - operand2;
 			break;
 		case 47:
-			std::cout << "div" << std::endl;
+			result = operand1 / operand2;
 			break;
 		default:
 			std::cout << "Error: Invalid operator." << std::endl;
 			exit (-1);
 	}
+	numbers.push(result);
 }
 
 void RPN::calculation()
 {
-	singleOperation();
+	while (numbers.size() >= 2)
+		singleOperation();
+	std::cout << "Result is: " << numbers.top() << std::endl;
+	
 }
 
 void RPN::fillStack()
