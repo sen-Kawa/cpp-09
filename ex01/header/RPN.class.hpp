@@ -12,11 +12,12 @@ class RPN
 		
 		std::string expression;
 		std::stack<char> stack;
+		std::stack<int> numbers;
 
 		void	fillStack();
 		void	printStack();
 		void	checkOperand(char operand1, char operand2);
-		void	checkOperator();
+		void	checkOperator(char action);
 		void	calculation();
 		void	singleOperation();
 
