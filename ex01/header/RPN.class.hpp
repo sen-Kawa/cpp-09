@@ -2,12 +2,16 @@
 # define RPN_CLASS_HPP
 
 #include <iostream>
+#include <stack>
 
 class RPN
 {
 	private:
 		
 		std::string expression;
+		std::stack<char> stack;
+
+		void	fillStack();	
 
 
 	public:

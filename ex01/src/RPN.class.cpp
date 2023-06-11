@@ -1,5 +1,16 @@
 #include "../header/RPN.class.hpp"
 
+void RPN::fillStack()
+{
+	int	exp_size = expression.size();	
+
+	for (int i = exp_size; i >= 0; i--)
+	{
+		std::cout << "element: " << expression[i] << std::endl;
+		stack.push(expression[i]);
+	}
+}
+
 std::string RPN::getExpression(void) const
 {
 	return (this->expression);
@@ -7,6 +18,7 @@ std::string RPN::getExpression(void) const
 
 RPN::RPN(std::string input) : expression(input)
 {
+	fillStack();
 	return ;
 }
 
