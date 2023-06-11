@@ -1,26 +1,59 @@
 #include "../header/RPN.class.hpp"
 #include <cctype>
 
-void RPN::printQueue()
+void RPN::printStack()
 {
-	std::queue<char> q = queue;
-	while (!q.empty())
+	std::stack<char> s = stack;
+	while (!s.empty())
 	{
-		std::cout << "ELement: " << q.front() << std::endl;
-		q.pop();
+		std::cout << "ELement: " << s.top() << std::endl;
+		s.pop();
 	}
 }
 
-void RPN::fillQueue()
+void RPN::checkOperand(char operand1, char operand2)
 {
-	int	exp_size = expression.size();	
+	if (isdigit(operand1) == 0)
+	{
+		std::cout << "Error: Non-numeric operand " << operand1 << std::endl;
+		exit (-1);
+	}
+	if (isdigit(operand2) == 0)
+	{
+		std::cout << "Error: Non-numeric operand " << operand2 << std::endl;
+		exit (-1);
+	}
+}
 
-	for (int i = 0; i < exp_size; i++)
+void RPN::singleOperation()
+{
+	char operand1, operand2, action;
+
+	operand1 = stack.top();
+	stack.pop();
+	operand2 = stack.top();
+	stack.pop();
+	checkOperand(operand1, operand2);
+	action = stack.top();
+	stack.pop();
+	std::cout << action << std::endl;
+}
+
+void RPN::calculation()
+{
+	singleOperation();
+}
+
+void RPN::fillStack()
+{
+	int	exp_size = expression.size() - 1;	
+
+	for (int i = exp_size; i >= 0; i--)
 	{
 		if (expression[i] != ' ')
-			queue.push(expression[i]);
+			stack.push(expression[i]);
 	}
-	printQueue();
+	printStack();
 }
 
 std::string RPN::getExpression(void) const
@@ -30,7 +63,8 @@ std::string RPN::getExpression(void) const
 
 RPN::RPN(std::string input) : expression(input)
 {
-	fillQueue();
+	fillStack();
+	calculation();
 	return ;
 }
 

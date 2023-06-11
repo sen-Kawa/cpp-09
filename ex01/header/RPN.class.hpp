@@ -2,6 +2,7 @@
 # define RPN_CLASS_HPP
 
 #include <iostream>
+#include <cstdlib>
 #include <stack>
 #include <queue>
 
@@ -10,10 +11,14 @@ class RPN
 	private:
 		
 		std::string expression;
-		std::queue<char> queue;
+		std::stack<char> stack;
 
-		void	fillQueue();
-		void	printQueue();
+		void	fillStack();
+		void	printStack();
+		void	checkOperand(char operand1, char operand2);
+		void	checkOperator();
+		void	calculation();
+		void	singleOperation();
 
 
 	public:
