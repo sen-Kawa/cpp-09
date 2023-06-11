@@ -5,7 +5,8 @@ int RPN::checkOperator(char action)
 {
 	if (action != '+' && action != '-' && action != '/' && action != '*')
 	{
-		std::cout << "Error: Invalid operator " << action << std::endl;
+		std::cout << RED << "Error: Invalid operator "
+			<< action << std::endl;
 		exit (-1);
 	}
 	return (1);
@@ -37,7 +38,7 @@ void RPN::singleOperation()
 			result = operand1 / operand2;
 			break;
 		default:
-			std::cout << "Error" << std::endl;
+			std::cout << RED << "Error" << std::endl;
 	}
 	numbers.push(result);
 }
@@ -46,6 +47,8 @@ void RPN::fillStack()
 {
 	int	exp_size = expression.size();	
 
+	if (exp_size < 3)
+		exit (-1);
 	for (int i = 0; i < exp_size; i++)
 	{
 		if (expression[i] != ' ')
@@ -68,7 +71,8 @@ std::string RPN::getExpression(void) const
 RPN::RPN(std::string input) : expression(input)
 {
 	fillStack();
-	std::cout << "Result is: " << numbers.top() << std::endl;
+	if (!numbers.empty())
+		std::cout << CYAN << "Result is: " << DEF << numbers.top() << std::endl;
 	return ;
 }
 
@@ -88,4 +92,3 @@ RPN::~RPN(void)
 {
 	return ;
 }
-
