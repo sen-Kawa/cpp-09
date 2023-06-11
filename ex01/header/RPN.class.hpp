@@ -3,15 +3,17 @@
 
 #include <iostream>
 #include <stack>
+#include <queue>
 
 class RPN
 {
 	private:
 		
 		std::string expression;
-		std::stack<char> stack;
+		std::queue<char> queue;
 
-		void	fillStack();	
+		void	fillQueue();
+		void	printQueue();
 
 
 	public:

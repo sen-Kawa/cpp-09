@@ -1,14 +1,26 @@
 #include "../header/RPN.class.hpp"
+#include <cctype>
 
-void RPN::fillStack()
+void RPN::printQueue()
+{
+	std::queue<char> q = queue;
+	while (!q.empty())
+	{
+		std::cout << "ELement: " << q.front() << std::endl;
+		q.pop();
+	}
+}
+
+void RPN::fillQueue()
 {
 	int	exp_size = expression.size();	
 
-	for (int i = exp_size; i >= 0; i--)
+	for (int i = 0; i < exp_size; i++)
 	{
-		std::cout << "element: " << expression[i] << std::endl;
-		stack.push(expression[i]);
+		if (expression[i] != ' ')
+			queue.push(expression[i]);
 	}
+	printQueue();
 }
 
 std::string RPN::getExpression(void) const
@@ -18,7 +30,7 @@ std::string RPN::getExpression(void) const
 
 RPN::RPN(std::string input) : expression(input)
 {
-	fillStack();
+	fillQueue();
 	return ;
 }
 
