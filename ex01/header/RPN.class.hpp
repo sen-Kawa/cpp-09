@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stack>
-#include <queue>
+#include "colours.hpp"
 
 class RPN
 {
@@ -15,10 +15,7 @@ class RPN
 		std::stack<int> numbers;
 
 		void	fillStack();
-		void	printStack();
-		void	checkOperand(char operand1, char operand2);
-		void	checkOperator(char action);
-		void	calculation();
+		int		checkOperator(char action);
 		void	singleOperation();
 
 

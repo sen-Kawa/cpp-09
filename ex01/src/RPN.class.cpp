@@ -1,43 +1,14 @@
 #include "../header/RPN.class.hpp"
 #include <cctype>
 
-void RPN::printStack()
-{
-	std::stack<char> s = stack;
-	while (!s.empty())
-	{
-		std::cout << "ELement in chars: " << s.top() << std::endl;
-		s.pop();
-	}
-	std::stack<int> n = numbers;
-	while (!n.empty())
-	{
-		std::cout << "ELement in numbers: " << n.top() << std::endl;
-		n.pop();
-	}
-}
-
-void RPN::checkOperand(char operand1, char operand2)
-{
-	if (isdigit(operand1) == 0)
-	{
-		std::cout << "Error: Non-numeric operand " << operand1 << std::endl;
-		exit (-1);
-	}
-	if (isdigit(operand2) == 0)
-	{
-		std::cout << "Error: Non-numeric operand " << operand2 << std::endl;
-		exit (-1);
-	}
-}
-
-void RPN::checkOperator(char action)
+int RPN::checkOperator(char action)
 {
 	if (action != '+' && action != '-' && action != '/' && action != '*')
 	{
 		std::cout << "Error: Invalid operator " << action << std::endl;
 		exit (-1);
 	}
+	return (1);
 }
 
 void RPN::singleOperation()
@@ -45,9 +16,9 @@ void RPN::singleOperation()
 	int	operand1, operand2, result;
 	char action;
 
-	operand1 = numbers.top();
-	numbers.pop();
 	operand2 = numbers.top();
+	numbers.pop();
+	operand1 = numbers.top();
 	numbers.pop();
 	action = stack.top();
 	stack.pop();
@@ -66,35 +37,27 @@ void RPN::singleOperation()
 			result = operand1 / operand2;
 			break;
 		default:
-			std::cout << "Error: Invalid operator." << std::endl;
-			exit (-1);
+			std::cout << "Error" << std::endl;
 	}
 	numbers.push(result);
 }
 
-void RPN::calculation()
-{
-	while (numbers.size() >= 2)
-		singleOperation();
-	std::cout << "Result is: " << numbers.top() << std::endl;
-	
-}
-
 void RPN::fillStack()
 {
-	int	exp_size = expression.size() - 1;	
+	int	exp_size = expression.size();	
 
-	for (int i = exp_size; i >= 0; i--)
+	for (int i = 0; i < exp_size; i++)
 	{
 		if (expression[i] != ' ')
 		{
 			if (isdigit(expression[i]) != 0)
 				numbers.push(expression[i] - '0');
-			else
+			else if (checkOperator(expression[i]))
 				stack.push(expression[i]);
+			if (stack.size() == 1 && numbers.size() >= 2)
+				singleOperation();
 		}
 	}
-	printStack();
 }
 
 std::string RPN::getExpression(void) const
@@ -105,7 +68,7 @@ std::string RPN::getExpression(void) const
 RPN::RPN(std::string input) : expression(input)
 {
 	fillStack();
-	calculation();
+	std::cout << "Result is: " << numbers.top() << std::endl;
 	return ;
 }
 
