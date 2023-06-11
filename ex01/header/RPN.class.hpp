@@ -6,13 +6,15 @@
 class RPN
 {
 	private:
+		
+		std::string expression;
 
 
 	public:
 
-		int	getRPN(void) const;
+		std::string	getExpression(void) const;
 
-		RPN(char *input);
+		RPN(std::string input);
 		RPN(RPN const &src);
 		RPN&	operator=(RPN const &assign);
 		~RPN(void);
