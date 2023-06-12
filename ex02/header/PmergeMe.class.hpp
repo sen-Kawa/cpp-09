@@ -11,11 +11,15 @@ class PmergeMe
 {
 	private:
 
+		static const int	K = 5; 
 		char**	unsorted;
 		std::deque<int> dq;
 		std::vector<int> vec;
 
 		void	parsing();
+		void	sortVector(int beg, int end);
+		void	insertionSort(int beg, int end);
+		void	merge(int beg, int mid, int end);
 		void	error();
 		void	printArray();
 		void	printContainers();
