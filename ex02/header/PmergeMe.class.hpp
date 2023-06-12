@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <deque>
 #include "colours.hpp"
 
 class PmergeMe
@@ -10,6 +12,8 @@ class PmergeMe
 	private:
 
 		char**	unsorted;
+		std::deque<int> dq;
+		std::vector<int> vec;
 
 		void	parsing();
 		void	error();
