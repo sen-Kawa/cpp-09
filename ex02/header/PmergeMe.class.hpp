@@ -9,14 +9,18 @@ class PmergeMe
 {
 	private:
 
-		std::string	unsorted;
+		char**	unsorted;
+
+		void	parsing();
+		void	error();
+		void	printArray();
 
 
 	public:
 
-		std::string	getUnsorted(void) const;
+		char**	getUnsorted(void) const;
 
-		PmergeMe(void);
+		PmergeMe(char** unsorted);
 		PmergeMe(PmergeMe const &src);
 		PmergeMe&	operator=(PmergeMe const &assign);
 		~PmergeMe(void);
