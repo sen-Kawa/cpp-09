@@ -208,6 +208,7 @@ PmergeMe::PmergeMe(char** unsorted) : unsorted(unsorted)
 	finish = clock();
 	time_used = ((double) (finish - start)) / CLOCKS_PER_SEC;
 	std::cout << "Time by dq is: " << time_used << std::endl;
+
 	printContainers();
 	return ;
 }
