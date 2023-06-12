@@ -7,6 +7,23 @@ void PmergeMe::error()
 	exit(-1);
 }
 
+void PmergeMe::printContainers()
+{
+	std::deque<int>::iterator	it;
+
+	std::cout << CYAN << "Deque:" << DEF;
+	for (it = dq.begin(); it != dq.end(); ++it)
+		std::cout << " " << *it;
+	std::cout << std::endl;
+
+	std::vector<int>::iterator	itt;
+
+	std::cout << CYAN << "Vector:" << DEF;
+	for (itt = vec.begin(); itt != vec.end(); ++itt)
+		std::cout << " " << *itt;
+	std::cout << std::endl;
+}
+
 void PmergeMe::printArray()
 {
 	int i = 1;
@@ -33,9 +50,12 @@ void PmergeMe::parsing()
 				error();
 			j++;
 		}
+		vec.push_back(atoi(unsorted[i]));
+		dq.push_back(atoi(unsorted[i]));
 		i++;
 	}
 	printArray();
+	printContainers();
 }
 
 char** PmergeMe::getUnsorted(void) const

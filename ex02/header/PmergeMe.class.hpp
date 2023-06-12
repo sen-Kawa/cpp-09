@@ -18,6 +18,7 @@ class PmergeMe
 		void	parsing();
 		void	error();
 		void	printArray();
+		void	printContainers();
 
 
 	public:
