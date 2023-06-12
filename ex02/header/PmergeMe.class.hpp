@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <vector>
 #include <deque>
+#include <time.h>
 #include "colours.hpp"
 
 class PmergeMe
@@ -18,8 +19,11 @@ class PmergeMe
 
 		void	parsing();
 		void	sortVector(int beg, int end);
-		void	insertionSort(int beg, int end);
-		void	merge(int beg, int mid, int end);
+		void	insertionVector(int beg, int end);
+		void	mergeVector(int beg, int mid, int end);
+		void	sortDq(int beg, int end);
+		void	insertionDq(int beg, int end);
+		void	mergeDq(int beg, int mid, int end);
 		void	error();
 		void	printArray();
 		void	printContainers();
