@@ -22,13 +22,6 @@ void PmergeMe::printContainers()
 	for (itt = vec.begin(); itt != vec.end(); ++itt)
 		std::cout << " " << *itt;
 	std::cout << std::endl;
-
-	std::vector<int>::iterator	ittt;
-
-	std::cout << CYAN << "Vector tmp:" << DEF;
-	for (ittt = tmpvec.begin(); ittt != tmpvec.end(); ++ittt)
-		std::cout << " " << *ittt;
-	std::cout << std::endl;
 }
 
 void PmergeMe::printArray()
@@ -95,25 +88,21 @@ void PmergeMe::merge(int beg, int mid, int end)
 		{
 			vec[i] = left[left_i];
 			left_i++;
-			std::cout << "ho" << std::endl;
 		}
 		else if (left_i == n1)
 		{
 			vec[i] = right[right_i];
 			right_i++;
-			std::cout << "he" << std::endl;
 		}
 		else if (right[right_i] > left[left_i])
 		{
 			vec[i] = left[left_i];
 			left_i++;
-			std::cout << "ha" << std::endl;
 		}
 		else
 		{
 			vec[i] = right[right_i];
 			right_i++;
-			std::cout << "hu" << std::endl;
 		}
 	}
 }
@@ -140,7 +129,6 @@ PmergeMe::PmergeMe(char** unsorted) : unsorted(unsorted)
 {
 	parsing();
 	sortVector(0, vec.size() - 1);
-	std::cout << "vector size: " << vec.size() << std::endl;
 	printContainers();
 	return ;
 }
