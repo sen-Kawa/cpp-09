@@ -67,22 +67,23 @@ void PmergeMe::parsing()
 void PmergeMe::sort()
 {
 	clock_t	start, finish;
-	double	time_used;
+	double	time_v, time_dq;
 
 	std::cout << RED << "After:" << std::endl;
 	start = clock();
 	sortVector(0, vec.size() - 1);
 	finish = clock();
-	time_used = ((double) (finish - start)) / CLOCKS_PER_SEC;
+	time_v = ((double) (finish - start)) / CLOCKS_PER_SEC;
 	printVector(vec);
-	std::cout << YELLOW << "Time to process a range of " << vec.size() << " elements with std::vector is: " << std::fixed << time_used << DEF << std::endl;
 
 	start = clock();
 	sortDq(0, dq.size() - 1);
 	finish = clock();
-	time_used = ((double) (finish - start)) / CLOCKS_PER_SEC;
+	time_dq = ((double) (finish - start)) / CLOCKS_PER_SEC;
 	printDq(dq);
-	std::cout << YELLOW << "Time to process a range of " << dq.size() << " elements with std::deque is: " << std::fixed << time_used << DEF << std::endl;
+
+	std::cout << YELLOW << "Time to process a range of " << vec.size() << " elements with std::vector is: " << DEF << std::fixed << time_v  << std::endl;
+	std::cout << YELLOW << "Time to process a range of " << dq.size() << " elements with std::deque is: " << DEF << std::fixed << time_dq  << std::endl;
 
 	return ;	
 }
