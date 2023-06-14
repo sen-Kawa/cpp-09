@@ -70,6 +70,7 @@ void PmergeMe::sort()
 	double	time_v, time_dq;
 
 	std::cout << RED << "After:" << std::endl;
+
 	start = clock();
 	sortVector(0, vec.size() - 1);
 	finish = clock();
