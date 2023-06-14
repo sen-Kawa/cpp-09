@@ -18,17 +18,21 @@ class PmergeMe
 		std::deque<int> dq;
 		std::vector<int> vec;
 
+		void	error();
+		void	printVector(std::vector<int> &v);
+		void	printDq(std::deque<int> &d);
+		void	printArray();
+
 		void	parsing();
+		void	sort();
+
 		void	sortVector(int beg, int end);
 		void	insertionVector(int beg, int end);
 		void	mergeVector(int beg, int mid, int end);
+
 		void	sortDq(int beg, int end);
 		void	insertionDq(int beg, int end);
 		void	mergeDq(int beg, int mid, int end);
-		void	error();
-		void	printArray();
-		void	printDq(std::deque<int> &d);
-		void	printVector(std::vector<int> &v);
 
 
 	public:
