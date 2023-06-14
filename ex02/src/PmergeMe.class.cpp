@@ -3,6 +3,7 @@
 #include <cctype>
 #include <ctime>
 #include <ios>
+#include <vector>
 
 void PmergeMe::error()
 {
@@ -10,20 +11,23 @@ void PmergeMe::error()
 	exit(-1);
 }
 
-void PmergeMe::printContainers()
+void PmergeMe::printVector(std::vector<int> &v)
+{
+	std::vector<int>::iterator	it;
+
+	std::cout << CYAN << "Vector:" << DEF;
+	for (it = v.begin(); it != v.end(); ++it)
+		std::cout << " " << *it;
+	std::cout << std::endl;
+}
+
+void PmergeMe::printDq(std::deque<int> &d)
 {
 	std::deque<int>::iterator	it;
 
 	std::cout << CYAN << "Deque:" << DEF;
-	for (it = dq.begin(); it != dq.end(); ++it)
+	for (it = d.begin(); it != d.end(); ++it)
 		std::cout << " " << *it;
-	std::cout << std::endl;
-
-	std::vector<int>::iterator	itt;
-
-	std::cout << CYAN << "Vector:" << DEF;
-	for (itt = vec.begin(); itt != vec.end(); ++itt)
-		std::cout << " " << *itt;
 	std::cout << std::endl;
 }
 
@@ -58,16 +62,15 @@ void PmergeMe::parsing()
 		i++;
 	}
 	printArray();
-	printContainers();
 }
 
 void PmergeMe::insertionVector(int beg, int end)
 {
 	for (int i = beg; i < end; i++)
 	{
-		int temp = vec.at(i + 1);
+		int temp = vec[i + 1];
 		int	j = i + 1;
-		while (j > beg && vec.at(j - 1) > temp)
+		while (j > beg && vec[j - 1] > temp)
 		{
 			vec[j] = vec[j - 1];
 			j--;
@@ -80,9 +83,9 @@ void PmergeMe::insertionDq(int beg, int end)
 {
 	for (int i = beg; i < end; i++)
 	{
-		int temp = dq.at(i + 1);
+		int temp = dq[i + 1];
 		int	j = i + 1;
-		while (j > beg && dq.at(j - 1) > temp)
+		while (j > beg && dq[j - 1] > temp)
 		{
 			dq[j] = dq[j - 1];
 			j--;
@@ -94,13 +97,14 @@ void PmergeMe::insertionDq(int beg, int end)
 void PmergeMe::mergeVector(int beg, int mid, int end)
 {
 	int	n1 = mid - beg + 1;
-	int	n2 = end + 1;
-	std::vector<int> left = vec;
-	std::vector<int> right = vec;
-	int	right_i = mid + 1;
+	int	n2 = end - mid;
+	int	right_i = 0;
 	int	left_i = 0;
 
-	for (int i = beg; i < end - beg + 1; i++)
+	std::vector<int> left(vec.begin() + beg, vec.begin() + mid + 1);
+	std::vector<int> right(vec.begin() + mid + 1, vec.begin() + end + 1);
+
+	for (int i = beg; i <= end; i++)
 	{
 		if (right_i == n2)
 		{
@@ -128,13 +132,14 @@ void PmergeMe::mergeVector(int beg, int mid, int end)
 void PmergeMe::mergeDq(int beg, int mid, int end)
 {
 	int	n1 = mid - beg + 1;
-	int	n2 = end + 1;
-	std::deque<int> left = dq;
-	std::deque<int> right = dq;
-	int	right_i = mid + 1;
+	int	n2 = end - mid;
+	int	right_i = 0;
 	int	left_i = 0;
 
-	for (int i = beg; i < end - beg + 1; i++)
+	std::deque<int> left(dq.begin() + beg, dq.begin() + mid + 1);
+	std::deque<int> right(dq.begin() + mid + 1, dq.begin() + end + 1);
+
+	for (int i = beg; i <= end; i++)
 	{
 		if (right_i == n2)
 		{
@@ -201,15 +206,18 @@ PmergeMe::PmergeMe(char** unsorted) : unsorted(unsorted)
 	sortVector(0, vec.size() - 1);
 	finish = clock();
 	time_used = ((double) (finish - start)) / CLOCKS_PER_SEC;
+	printVector(vec);
+	std::cout << RED << "SORTED" << std::endl;
+	
+	printVector(vec);
 	std::cout << "Time by vector is: " << std::fixed << time_used << std::endl;
-
+/*
 	start = clock();
 	sortDq(0, dq.size() - 1);
 	finish = clock();
 	time_used = ((double) (finish - start)) / CLOCKS_PER_SEC;
 	std::cout << "Time by dq is: " << time_used << std::endl;
-
-	printContainers();
+*/
 	return ;
 }
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <unistd.h>
 #include <vector>
 #include <deque>
 #include <time.h>
@@ -26,7 +27,8 @@ class PmergeMe
 		void	mergeDq(int beg, int mid, int end);
 		void	error();
 		void	printArray();
-		void	printContainers();
+		void	printDq(std::deque<int> &d);
+		void	printVector(std::vector<int> &v);
 
 
 	public:
